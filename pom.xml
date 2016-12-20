@@ -72,6 +72,10 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>hdp</id>
+      <url>http://repo.hortonworks.com/content/repositories/releases/</url>
+    </repository>
   </repositories>
 
   <parent>
