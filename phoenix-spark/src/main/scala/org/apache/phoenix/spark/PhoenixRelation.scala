@@ -24,10 +24,11 @@ import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.sql.sources._
 import org.apache.phoenix.util.StringUtil.escapeStringConstant
 import org.apache.phoenix.util.SchemaUtil
+import org.apache.commons.logging.LogFactory
 
 case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Boolean = false)(@transient val sqlContext: SQLContext)
     extends BaseRelation with PrunedFilteredScan {
-
+  val LOG = LogFactory.getLog(classOf[PhoenixRelation])
   /*
     This is the buildScan() implementing Spark's PrunedFilteredScan.
     Spark SQL queries with columns or predicates specified will be pushed down
@@ -105,6 +106,7 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
 
   // Helper function to escape string values in SQL queries
   private def compileValue(value: Any): Any = value match {
+
     case stringValue: String => s"'${escapeStringConstant(stringValue)}'"
 
     // Borrowed from 'elasticsearch-hadoop', support these internal UTF types across Spark versions
@@ -112,7 +114,10 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
     case utf if (isClass(utf, "org.apache.spark.sql.types.UTF8String")) => s"'${escapeStringConstant(utf.toString)}'"
     // Spark 1.5
     case utf if (isClass(utf, "org.apache.spark.unsafe.types.UTF8String")) => s"'${escapeStringConstant(utf.toString)}'"
-
+    case timestampValue: java.sql.Timestamp => {
+      s"to_timestamp('${timestampValue}')"
+    }
+    // Wrapping value in to_timestamp if
     // Pass through anything else
     case _ => value
   }
