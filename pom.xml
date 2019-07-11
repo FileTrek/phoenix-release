@@ -40,19 +40,28 @@
 
   <repositories>
     <repository>
-      <id>apache release</id>
-      <url>https://repository.apache.org/content/repositories/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+      <id>HDPReleases</id>
+      <name>HDP Releases</name>
+      <url>http://repo.hortonworks.com/content/repositories/releases/</url>
+      <layout>default</layout>
     </repository>
     <repository>
-      <id>hwx-public</id>
-      <name>hwx</name>
-      <url>http://nexus-private.hortonworks.com/nexus/content/groups/public/</url>
-			<releases>
-			  <enabled>true</enabled>
-			</releases>
-			<snapshots>
-			  <enabled>true</enabled>
-			</snapshots>
+      <id>public.repo.hortonworks.com</id>
+      <name>Public Hortonworks Maven Repo</name>
+      <url>http://repo.hortonworks.com/content/groups/public/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
   </repositories>
 
