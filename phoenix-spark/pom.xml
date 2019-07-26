@@ -33,6 +33,19 @@
   <artifactId>phoenix-spark</artifactId>
   <name>Phoenix - Spark</name>
 
+  <distributionManagement>
+	<repository>
+	  <id>jenkins</id>
+	  <name>jenkins-releases</name>
+	  <url>http://artifactory/artifactory/libs-release-local</url>
+	</repository>
+	<snapshotRepository>
+	  <id>jenkins</id>
+	  <name>jenkins-snapshots</name>
+	  <url>http://artifactory/artifactory/libs-snapshot-local</url>
+	</snapshotRepository>
+  </distributionManagement>
+
   <properties>
     <top.dir>${project.basedir}/..</top.dir>
   </properties>
