@@ -11,7 +11,7 @@ node("ops") {
     }
     stage('Building Phoenix Spark Jar') {
        withCredentials([file(credentialsId: 'm2_settings.xml_password', variable: 'M2_SETTING')]) {
-            sh "cp -f $M2_SETTING ~/.m2/settings.xml"
+            sh "mkdir -p ~/.m2 && cp -f $M2_SETTING ~/.m2/settings.xml"
             dir('phoenix-spark/') {
                 sh "mvn clean deploy" 
                 archiveArtifacts 'target/phoenix-spark-5.0.0.3.1.0.0-78.jar'
