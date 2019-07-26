@@ -1,0 +1,18 @@
+#!/usr/bin/groovy
+@Library('intersetLib') _
+properties([
+    parameters([
+        string(defaultValue: params.BRANCH_NAME, description: 'Branch of git repo to get jenkinsfile from', name: 'BRANCH_NAME'),
+    ])
+])
+node("ops") {
+    stage('Cloning Repo') {
+        git branch: params.BRANCH_NAME, credentialsId: 'interset-readonly', url: 'git@github.com:Filetrek/Docker.git'
+    }
+    stage('Building Phoenix Spark Jar') {
+        dir('phoenix-spark/') {
+            sh "mvn clean package" 
+            archiveArtifacts 'target/phoenix-spark-5.0.0.3.1.0.0-78.jar'
+        }
+    }
+}
