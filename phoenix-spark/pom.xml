@@ -37,13 +37,8 @@
 	<repository>
 	  <id>jenkins</id>
 	  <name>jenkins-releases</name>
-	  <url>http://artifactory/artifactory/libs-release-local</url>
+	  <url>http://artifactory/artifactory/ext-release-local</url>
 	</repository>
-	<snapshotRepository>
-	  <id>jenkins</id>
-	  <name>jenkins-snapshots</name>
-	  <url>http://artifactory/artifactory/libs-snapshot-local</url>
-	</snapshotRepository>
   </distributionManagement>
 
   <properties>
