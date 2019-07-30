@@ -1,0 +1,21 @@
+#!/usr/bin/groovy
+@Library('intersetLib') _
+properties([
+    parameters([
+        string(defaultValue: params.BRANCH_NAME, description: 'Branch of git repo to get jenkinsfile from', name: 'BRANCH_NAME'),
+    ])
+])
+node("ops") {
+    stage('Cloning Repo') {
+        git branch: params.BRANCH_NAME, credentialsId: 'interset-readonly', url: 'git@github.com:Filetrek/phoenix-release.git'
+    }
+    stage('Building Phoenix Spark Jar') {
+       withCredentials([file(credentialsId: 'm2_settings.xml_password', variable: 'M2_SETTING')]) {
+            sh "mkdir -p ~/.m2 && cp -f $M2_SETTING ~/.m2/settings.xml"
+            dir('phoenix-spark/') {
+                sh "mvn clean deploy" 
+                archiveArtifacts 'target/phoenix-spark-5.0.0.3.1.0.0-78.jar'
+            }
+        }
+    }
+}
