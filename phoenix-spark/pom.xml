@@ -33,14 +33,6 @@
   <artifactId>phoenix-spark</artifactId>
   <name>Phoenix - Spark</name>
 
-  <distributionManagement>
-	<repository>
-	  <id>jenkins</id>
-	  <name>jenkins-releases</name>
-	  <url>http://artifactory/artifactory/ext-release-local</url>
-	</repository>
-  </distributionManagement>
-
   <properties>
     <top.dir>${project.basedir}/..</top.dir>
   </properties>

@@ -21,6 +21,19 @@
     <url>http://www.apache.org</url>
   </organization>
 
+  <distributionManagement>
+	<repository>
+	  <id>jenkins</id>
+	  <name>jenkins-releases</name>
+	  <url>http://artifactory/artifactory/libs-release-local</url>
+	</repository>
+	<snapshotRepository>
+	  <id>jenkins</id>
+	  <name>jenkins-snapshots</name>
+	  <url>http://artifactory/artifactory/libs-snapshot-local</url>
+	</snapshotRepository>
+  </distributionManagement>
+
   <modules>
     <module>phoenix-core</module>
     <module>phoenix-flume</module>
