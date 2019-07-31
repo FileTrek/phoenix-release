@@ -32,6 +32,7 @@
   </parent>
   <artifactId>phoenix-spark</artifactId>
   <name>Phoenix - Spark</name>
+  <version>5.0.0.3.1.0.0-78-hdp3.1</version>
 
   <properties>
     <top.dir>${project.basedir}/..</top.dir>
