@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.phoenix</groupId>
   <artifactId>phoenix</artifactId>
-  <version>5.0.0.3.1.0.0-78</version>
+  <version>5.0.0.3.1.0.0-78-hdp3.1.0</version>
   <packaging>pom</packaging>
   <name>Apache Phoenix</name>
   <description>A SQL layer over HBase</description>
@@ -25,13 +25,8 @@
 	<repository>
 	  <id>jenkins</id>
 	  <name>jenkins-releases</name>
-	  <url>http://artifactory/artifactory/libs-release-local</url>
+	  <url>http://artifactory/artifactory/ext-release-local</url>
 	</repository>
-	<snapshotRepository>
-	  <id>jenkins</id>
-	  <name>jenkins-snapshots</name>
-	  <url>http://artifactory/artifactory/libs-snapshot-local</url>
-	</snapshotRepository>
   </distributionManagement>
 
   <modules>
