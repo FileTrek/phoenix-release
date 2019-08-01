@@ -69,6 +69,7 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
   // Attempt to create Phoenix-accepted WHERE clauses from Spark filters,
   // mostly inspired from Spark SQL JDBCRDD and the couchbase-spark-connector
   private def buildFilter(filters: Array[Filter]): String = {
+    
     if (filters.isEmpty) {
       return ""
     }
@@ -79,14 +80,14 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
     filters.foreach(f => {
       // Assume conjunction for multiple filters, unless otherwise specified
       if (i > 0) {
-        filter.append(" AND")
+        filter.append(" AND ")
       }
 
       f match {
         // Spark 1.3.1+ supported filters
-        case And(leftFilter, rightFilter) => filter.append(buildFilter(Array(leftFilter, rightFilter)))
-        case Or(leftFilter, rightFilter) => filter.append(buildFilter(Array(leftFilter)) + " OR " + buildFilter(Array(rightFilter)))
-        case Not(aFilter) => filter.append(" NOT " + buildFilter(Array(aFilter)))
+        case And(leftFilter, rightFilter) => filter.append("(" + buildFilter(Array(leftFilter, rightFilter)) + ")")
+        case Or(leftFilter, rightFilter) => filter.append("(" + buildFilter(Array(leftFilter)) + " OR " + buildFilter(Array(rightFilter)) + ")")
+        case Not(aFilter) => filter.append(" NOT " + "(" + buildFilter(Array(aFilter)) + ")")
         case EqualTo(attr, value) => filter.append(s" ${escapeKey(attr)} = ${compileValue(value)}")
         case GreaterThan(attr, value) => filter.append(s" ${escapeKey(attr)} > ${compileValue(value)}")
         case GreaterThanOrEqual(attr, value) => filter.append(s" ${escapeKey(attr)} >= ${compileValue(value)}")
@@ -102,7 +103,6 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
 
       i = i + 1
     })
-
     filter.toString()
   }
 
