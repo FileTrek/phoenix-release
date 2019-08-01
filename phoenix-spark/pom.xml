@@ -28,18 +28,11 @@
   <parent>
     <groupId>org.apache.phoenix</groupId>
     <artifactId>phoenix</artifactId>
-    <version>5.0.0.3.1.0.0-78</version>
+    <version>5.0.0.3.1.0.0-78-hdp</version>
   </parent>
   <artifactId>phoenix-spark</artifactId>
   <name>Phoenix - Spark</name>
-
-  <distributionManagement>
-	<repository>
-	  <id>jenkins</id>
-	  <name>jenkins-releases</name>
-	  <url>http://artifactory/artifactory/ext-release-local</url>
-	</repository>
-  </distributionManagement>
+  <version>5.0.0.3.1.0.0-78-hdp</version>
 
   <properties>
     <top.dir>${project.basedir}/..</top.dir>
