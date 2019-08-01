@@ -25,15 +25,12 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.sql.sources._
-
-import org.apache.commons.logging.LogFactory;
 import org.apache.phoenix.util.StringUtil.escapeStringConstant
 import org.apache.phoenix.util.{DateUtil, SchemaUtil}
 
 case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Boolean = false)(@transient val sqlContext: SQLContext)
     extends BaseRelation with PrunedFilteredScan {
 
-  val log = LogFactory.getLog("ESClient")
   val dateformat:Format = DateUtil.getDateFormatter(DateUtil.DEFAULT_DATE_FORMAT)
   val timeformat:Format = DateUtil.DEFAULT_TIMESTAMP_FORMATTER
 
