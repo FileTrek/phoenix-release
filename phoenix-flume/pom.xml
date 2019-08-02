@@ -33,6 +33,7 @@
 
   <properties>
     <top.dir>${project.basedir}/..</top.dir>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
 
   <dependencies>
