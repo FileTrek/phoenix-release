@@ -33,6 +33,10 @@
   <name>Phoenix Load Balancer</name>
   <description>A Load balancer which routes calls to Phoenix Query Server</description>
 
+  <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.hbase</groupId>

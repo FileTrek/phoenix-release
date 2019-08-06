@@ -38,6 +38,7 @@
     <top.dir>${project.basedir}/..</top.dir>
     <maven.test.skip>true</maven.test.skip>
     <source.skip>true</source.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
 
   <build>

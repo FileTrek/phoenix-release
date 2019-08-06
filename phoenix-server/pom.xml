@@ -33,6 +33,7 @@
   <name>Phoenix Server</name>
   <description>Phoenix Server</description>
   <packaging>jar</packaging>
+
   <properties>
     <!-- Don't make a test-jar -->
     <maven.test.skip>true</maven.test.skip>
@@ -41,6 +42,7 @@
     <license.bundles.dependencies>true</license.bundles.dependencies>
     <top.dir>${project.basedir}/..</top.dir>
     <shaded.package>org.apache.phoenix.shaded</shaded.package>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
 
   <build>

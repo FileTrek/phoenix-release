@@ -41,7 +41,7 @@
     <license.bundles.dependencies>true</license.bundles.dependencies>
     <top.dir>${project.basedir}/..</top.dir>
     <shaded.package>org.apache.phoenix.shaded</shaded.package>
-
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
 
   <build>
