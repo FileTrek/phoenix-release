@@ -29,7 +29,8 @@ class DefaultSource extends RelationProvider with CreatableRelationProvider {
     new PhoenixRelation(
       parameters("table"),
       parameters("zkUrl"),
-      parameters.contains("dateAsTimestamp")
+      parameters.contains("dateAsTimestamp"),
+      parameters.get("hints")
     )(sqlContext)
   }
 

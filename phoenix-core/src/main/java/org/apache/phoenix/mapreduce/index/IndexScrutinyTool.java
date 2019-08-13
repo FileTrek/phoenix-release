@@ -53,6 +53,7 @@ import org.apache.phoenix.mapreduce.CsvBulkImportUtil;
 import org.apache.phoenix.mapreduce.util.ConnectionUtil;
 import org.apache.phoenix.mapreduce.util.PhoenixConfigurationUtil;
 import org.apache.phoenix.mapreduce.util.PhoenixMapReduceUtil;
+import org.apache.phoenix.parse.HintNode;
 import org.apache.phoenix.parse.HintNode.Hint;
 import org.apache.phoenix.schema.PTable;
 import org.apache.phoenix.util.EnvironmentEdgeManager;
@@ -262,8 +263,7 @@ public class IndexScrutinyTool extends Configured implements Tool {
             // index table,
             // or select the data table equivalents of the index columns from the data table
             final String selectQuery =
-                    QueryUtil.constructSelectStatement(qSourceTable, sourceColumnNames, null,
-                        Hint.NO_INDEX, true);
+                    QueryUtil.constructSelectStatement(qSourceTable, sourceColumnNames, null, true, HintNode.create(HintNode.EMPTY_HINT_NODE, Hint.NO_INDEX));
             LOG.info("Query used on source table to feed the mapper: " + selectQuery);
 
             PhoenixConfigurationUtil.setScrutinyOutputFormat(configuration, outputFormat);

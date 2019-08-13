@@ -271,7 +271,7 @@ public class IndexScrutinyTableOutput {
         String pkColsCsv = getPksCsv();
         String query =
                 QueryUtil.constructSelectStatement(OUTPUT_METADATA_TABLE_NAME, metadataSelectCols,
-                    pkColsCsv, null, true);
+                    pkColsCsv, true, null );
         String inClause = " IN " + QueryUtil.constructParameterizedInClause(3, 1);
         return query + inClause;
     }
@@ -332,7 +332,7 @@ public class IndexScrutinyTableOutput {
         // dynamic defined after the table name
         // https://phoenix.apache.org/dynamic_columns.html
         String dynamicTableName = OUTPUT_TABLE_NAME + "(" + dynamicCols + ")";
-        return QueryUtil.constructSelectStatement(dynamicTableName, selectCols, conditions, null, true);
+        return QueryUtil.constructSelectStatement(dynamicTableName, selectCols, conditions, true,null);
     }
 
     private static List<String> getOutputTableColumns(Connection connection) throws SQLException {

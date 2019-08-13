@@ -28,7 +28,7 @@ import org.apache.spark.sql.sources._
 import org.apache.phoenix.util.StringUtil.escapeStringConstant
 import org.apache.phoenix.util.{DateUtil, SchemaUtil}
 
-case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Boolean = false)(@transient val sqlContext: SQLContext)
+case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Boolean = false, hints: Option[String] = None)(@transient val sqlContext: SQLContext)
     extends BaseRelation with PrunedFilteredScan {
 
   val dateformat:Format = DateUtil.getDateFormatter(DateUtil.DEFAULT_DATE_FORMAT)
@@ -49,7 +49,8 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
       Some(buildFilter(filters)),
       Some(zkUrl),
       new Configuration(),
-      dateAsTimestamp
+      dateAsTimestamp,
+      hints = hints
     ).toDataFrame(sqlContext).rdd
   }
 
@@ -62,7 +63,8 @@ case class PhoenixRelation(tableName: String, zkUrl: String, dateAsTimestamp: Bo
       None,
       Some(zkUrl),
       new Configuration(),
-      dateAsTimestamp
+      dateAsTimestamp,
+      hints = None
     ).toDataFrame(sqlContext).schema
   }
 

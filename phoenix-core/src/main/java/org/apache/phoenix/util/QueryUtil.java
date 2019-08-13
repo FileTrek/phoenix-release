@@ -210,7 +210,24 @@ public final class QueryUtil {
             public String apply(ColumnInfo input) {
                 return input.getColumnName();
             }});
-        return constructSelectStatement(fullTableName, columns , conditions, null, false);
+        return constructSelectStatement(fullTableName, columns , conditions, false, null);
+    }
+
+    /**
+     *
+     * @param fullTableName name of the table for which the select statement needs to be created.
+     * @param columnInfos  list of columns to be projected in the select statement.
+     * @param conditions   The condition clause to be added to the WHERE condition
+     * @param hintNode A hint node to help the query optimiser choosing the desired plan
+     * @return Select Query
+     */
+    public static String constructSelectStatementHinted(String fullTableName, List<ColumnInfo> columnInfos,final String conditions, final HintNode hintNode) {
+        List<String> columns = Lists.transform(columnInfos, new Function<ColumnInfo, String>(){
+            @Override
+            public String apply(ColumnInfo input) {
+                return input.getColumnName();
+            }});
+        return constructSelectStatement(fullTableName, columns , conditions, false, hintNode);
     }
 
     /**
@@ -218,12 +235,12 @@ public final class QueryUtil {
      * @param fullTableName name of the table for which the select statement needs to be created.
      * @param columns list of columns to be projected in the select statement.
      * @param conditions The condition clause to be added to the WHERE condition
-     * @param hint hint to use
+     * @param hintNode hintNode to use
      * @param escapeCols whether to escape the projected columns
      * @return Select Query
      */
     public static String constructSelectStatement(String fullTableName, List<String> columns,
-            final String conditions, Hint hint, boolean escapeCols) {
+            final String conditions, boolean escapeCols, HintNode hintNode) {
         Preconditions.checkNotNull(fullTableName, "Table name cannot be null");
         if (columns == null || columns.isEmpty()) {
             throw new IllegalArgumentException("At least one column must be provided");
@@ -231,12 +248,7 @@ public final class QueryUtil {
         StringBuilder query = new StringBuilder();
         query.append("SELECT ");
 
-        String hintStr = "";
-        if (hint != null) {
-            final HintNode node = new HintNode(hint.name());
-            hintStr = node.toString();
-        }
-        query.append(hintStr);
+        query.append(hintNode.toString());
 
         for (String col : columns) {
             if (col != null) {

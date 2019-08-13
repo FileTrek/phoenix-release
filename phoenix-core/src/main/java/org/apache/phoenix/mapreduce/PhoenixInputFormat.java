@@ -181,9 +181,16 @@ public class PhoenixInputFormat<T extends DBWritable> extends InputFormat<NullWr
                  final Statement statement = connection.createStatement()) {
 
               final String selectStatement = PhoenixConfigurationUtil.getSelectStatement(configuration);
+
+
+              // final String selectStatement =  "SELECT /*+ INDEX(ERC_I ERC_INDEX) */ \"TIMESTAMP\",\"TID\" FROM ERC_I WHERE ( \"TIMESTAMP\" IS NOT NULL AND \"TID\" IS NOT NULL AND \"TID\" = 'bdh' AND \"TIMESTAMP\" >= to_timestamp('2016-05-30 00:13:00.0') AND \"TIMESTAMP\" <= to_timestamp('2016-05-30 00:40:00.0'))";
+
               Preconditions.checkNotNull(selectStatement);
 
-              final PhoenixStatement pstmt = statement.unwrap(PhoenixStatement.class);
+
+
+
+                final PhoenixStatement pstmt = statement.unwrap(PhoenixStatement.class);
               // Optimize the query plan so that we potentially use secondary indexes
               final QueryPlan queryPlan = pstmt.optimizeQuery(selectStatement);
               final Scan scan = queryPlan.getContext().getScan();

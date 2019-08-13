@@ -48,6 +48,7 @@ import org.apache.phoenix.mapreduce.ImportPreUpsertKeyValueProcessor;
 import org.apache.phoenix.mapreduce.PhoenixInputFormat;
 import org.apache.phoenix.mapreduce.index.IndexScrutinyTool.OutputFormat;
 import org.apache.phoenix.mapreduce.index.IndexScrutinyTool.SourceTable;
+import org.apache.phoenix.parse.HintNode;
 import org.apache.phoenix.schema.PName;
 import org.apache.phoenix.schema.PTable;
 import org.apache.phoenix.schema.PTableKey;
@@ -150,6 +151,8 @@ public final class PhoenixConfigurationUtil {
     public static final String RESTORE_DIR_KEY = "phoenix.tableSnapshot.restore.dir";
 
     public static final String MAPREDUCE_TENANT_ID = "phoenix.mapreduce.tenantid";
+
+    public static final String HINTS = "phoenix.hints" ;
 
     public enum SchemaType {
         TABLE,
@@ -382,7 +385,16 @@ public final class PhoenixConfigurationUtil {
         Preconditions.checkNotNull(tableName);
         final List<ColumnInfo> columnMetadataList = getSelectColumnMetadataList(configuration);
         final String conditions = configuration.get(INPUT_TABLE_CONDITIONS);
-        selectStmt = QueryUtil.constructSelectStatement(tableName, columnMetadataList, conditions);
+
+        if(configuration.get(HINTS) != null && configuration.get(HINTS) != null) {
+            final HintNode hintNode = new HintNode(configuration.get(HINTS));
+            selectStmt = QueryUtil.constructSelectStatementHinted(tableName, columnMetadataList, conditions, hintNode);
+        }
+        else {
+            selectStmt = QueryUtil.constructSelectStatement(tableName, columnMetadataList, conditions);
+        }
+
+
         LOG.info("Select Statement: "+ selectStmt);
         configuration.set(SELECT_STATEMENT, selectStmt);
         return selectStmt;
