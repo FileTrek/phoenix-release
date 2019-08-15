@@ -248,7 +248,9 @@ public final class QueryUtil {
         StringBuilder query = new StringBuilder();
         query.append("SELECT ");
 
-        query.append(hintNode.toString());
+        if(hintNode != null && !hintNode.isEmpty()) {
+            query.append(hintNode.toString());
+        }
 
         for (String col : columns) {
             if (col != null) {

@@ -30,7 +30,7 @@ class DefaultSource extends RelationProvider with CreatableRelationProvider {
       parameters("table"),
       parameters("zkUrl"),
       parameters.contains("dateAsTimestamp"),
-      parameters.get("hints")
+      parameters.get("queryHint")
     )(sqlContext)
   }
 

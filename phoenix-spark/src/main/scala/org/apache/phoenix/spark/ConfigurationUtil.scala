@@ -68,10 +68,6 @@ object ConfigurationUtil extends Serializable {
       conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT, info.getRootNode)
   }
 
-  def setHints(conf: Configuration, hints: String) = {
-    conf.set(PhoenixConfigurationUtil.HINTS, hints)
-  }
-
   def setTenantId(conf: Configuration, tenantId: String) = {
     conf.set(PhoenixRuntime.TENANT_ID_ATTRIB, tenantId)
   }

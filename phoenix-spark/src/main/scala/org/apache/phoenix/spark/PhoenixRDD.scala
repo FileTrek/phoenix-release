@@ -36,7 +36,7 @@ class PhoenixRDD(sc: SparkContext, table: String, columns: Seq[String],
                  zkUrl: Option[String] = None,
                  @transient conf: Configuration, dateAsTimestamp: Boolean = false,
                  tenantId: Option[String] = None,
-                 hints: Option[String] = None
+                 queryHint: Option[String] = None
                 )
   extends RDD[PhoenixRecordWritable](sc, Nil) {
 
@@ -110,8 +110,8 @@ class PhoenixRDD(sc: SparkContext, table: String, columns: Seq[String],
       case _ =>
     }
 
-    hints match {
-      case Some(h) => ConfigurationUtil.setHints(config, h)
+    queryHint match {
+      case Some(hint) => PhoenixConfigurationUtil.setQueryHint(config, hint)
       case _ =>
     }
 

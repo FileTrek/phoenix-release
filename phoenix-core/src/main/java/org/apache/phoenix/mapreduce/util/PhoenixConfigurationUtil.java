@@ -152,7 +152,7 @@ public final class PhoenixConfigurationUtil {
 
     public static final String MAPREDUCE_TENANT_ID = "phoenix.mapreduce.tenantid";
 
-    public static final String HINTS = "phoenix.hints" ;
+    public static final String QUERY_HINT = "phoenix.query.hint" ;
 
     public enum SchemaType {
         TABLE,
@@ -170,6 +170,12 @@ public final class PhoenixConfigurationUtil {
         Preconditions.checkNotNull(configuration);
         Preconditions.checkNotNull(tableName);
         configuration.set(INPUT_TABLE_NAME, tableName);
+    }
+
+    public static void setQueryHint(final Configuration configuration, final String hint) {
+        Preconditions.checkNotNull(configuration);
+        Preconditions.checkNotNull(hint);
+        configuration.set(QUERY_HINT, hint);
     }
     
     public static void setInputTableConditions(final Configuration configuration, final String conditions) {
@@ -386,8 +392,8 @@ public final class PhoenixConfigurationUtil {
         final List<ColumnInfo> columnMetadataList = getSelectColumnMetadataList(configuration);
         final String conditions = configuration.get(INPUT_TABLE_CONDITIONS);
 
-        if(configuration.get(HINTS) != null && configuration.get(HINTS) != null) {
-            final HintNode hintNode = new HintNode(configuration.get(HINTS));
+        if(getQueryHint(configuration) != null) {
+            final HintNode hintNode = new HintNode(getQueryHint(configuration));
             selectStmt = QueryUtil.constructSelectStatementHinted(tableName, columnMetadataList, conditions, hintNode);
         }
         else {
@@ -431,6 +437,11 @@ public final class PhoenixConfigurationUtil {
     public static String getInputTableName(Configuration configuration) {
         Preconditions.checkNotNull(configuration);
         return configuration.get(INPUT_TABLE_NAME);
+    }
+
+    public static String getQueryHint(Configuration configuration) {
+        Preconditions.checkNotNull(configuration);
+        return configuration.get(QUERY_HINT);
     }
 
     public static String getPhysicalTableName(Configuration configuration) {
