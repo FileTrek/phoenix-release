@@ -123,6 +123,22 @@ public class PhoenixRpcScheduler extends RpcScheduler {
         return this.delegate.getActiveRpcHandlerCount() + this.indexCallExecutor.getActiveHandlerCount() + this.metadataCallExecutor.getActiveHandlerCount();
     }
 
+    @Override public int getActiveGeneralRpcHandlerCount() {
+        return this.delegate.getActiveGeneralRpcHandlerCount();
+    }
+
+    @Override public int getActivePriorityRpcHandlerCount() {
+        return this.delegate.getActivePriorityRpcHandlerCount();
+    }
+
+    @Override public int getActiveMetaPriorityRpcHandlerCount() {
+        return this.delegate.getActiveMetaPriorityRpcHandlerCount();
+    }
+
+    @Override public int getActiveReplicationRpcHandlerCount() {
+        return this.delegate.getActiveReplicationRpcHandlerCount();
+    }
+
     @Override
     public long getNumGeneralCallsDropped() {
         return delegate.getNumGeneralCallsDropped();

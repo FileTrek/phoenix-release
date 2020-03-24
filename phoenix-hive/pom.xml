@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.apache.phoenix</groupId>
     <artifactId>phoenix</artifactId>
-    <version>5.0.0.3.1.5.9-1</version>
+    <version>5.0.0.7.0.3.0-79</version>
   </parent>
   <artifactId>phoenix-hive</artifactId>
   <name>Phoenix - Hive</name>
@@ -77,11 +77,23 @@
       <artifactId>hive-exec</artifactId>
       <version>${hive.version}</version>
       <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.cloudera.logredactor</groupId>
+          <artifactId>logredactor</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-common</artifactId>
       <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.cloudera.logredactor</groupId>
+          <artifactId>logredactor</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -133,7 +145,7 @@
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
-      <version>4.1.17.Final</version>
+      <version>4.1.42.Final</version>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
@@ -166,26 +178,12 @@
       <groupId>org.apache.tez</groupId>
       <artifactId>tez-tests</artifactId>
       <scope>test</scope>
-      <version>${tez.version}</version>
       <type>test-jar</type>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.hadoop</groupId>
-          <artifactId>hadoop-yarn-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.tez</groupId>
       <artifactId>tez-dag</artifactId>
       <scope>test</scope>
-      <version>${tez.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.hadoop</groupId>
-          <artifactId>hadoop-yarn-api</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
@@ -196,6 +194,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
+      <version>19.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.calcite.avatica</groupId>

@@ -544,6 +544,10 @@ public class IndexUtil {
             // TODO: Create DelegateCell class instead
             Cell newCell = new Cell() {
 
+                @Override public long heapSize() {
+                    return cell.heapSize();
+                }
+
                 @Override
                 public byte[] getRowArray() {
                     return cell.getRowArray();
@@ -616,6 +620,10 @@ public class IndexUtil {
                 @Override
                 public int getValueLength() {
                     return cell.getValueLength();
+                }
+
+                @Override public int getSerializedSize() {
+                    return cell.getSerializedSize() - offset;
                 }
 
                 @Override

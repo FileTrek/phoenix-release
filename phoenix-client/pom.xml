@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.apache.phoenix</groupId>
     <artifactId>phoenix</artifactId>
-    <version>5.0.0.3.1.5.9-1</version>
+    <version>5.0.0.7.0.3.0-79</version>
   </parent>
   <artifactId>phoenix-client</artifactId>
   <name>Phoenix Client</name>
@@ -372,10 +372,12 @@
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-core</artifactId>
     </dependency>
+    <!-- We do not build or ship phoenix-flume
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-flume</artifactId>
     </dependency>
+    -->
     <dependency>
       <groupId>org.apache.phoenix</groupId>
       <artifactId>phoenix-pig</artifactId>

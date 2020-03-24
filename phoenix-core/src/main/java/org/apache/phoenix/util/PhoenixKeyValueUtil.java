@@ -179,7 +179,7 @@ public class PhoenixKeyValueUtil {
         long size = 0;
         for (Entry<byte [], List<Cell>> entry : m.getFamilyCellMap().entrySet()) {
             for (Cell c : entry.getValue()) {
-                size += org.apache.hadoop.hbase.KeyValueUtil.length(c);
+                size += c.getSerializedSize();
             }
         }
         return size;
@@ -187,7 +187,7 @@ public class PhoenixKeyValueUtil {
 
     /**
      * Estimates the storage size of a row
-     * @param mutations map from table to row to RowMutationState
+     * @param tableMutationMap map from table to row to RowMutationState
      * @return estimated row size
      */
     public static long getEstimatedRowMutationSize(

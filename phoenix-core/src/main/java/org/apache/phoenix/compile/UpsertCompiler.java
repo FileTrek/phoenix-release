@@ -100,7 +100,6 @@ import org.apache.phoenix.schema.UpsertColumnsValuesMismatchException;
 import org.apache.phoenix.schema.tuple.Tuple;
 import org.apache.phoenix.schema.types.PDataType;
 import org.apache.phoenix.schema.types.PLong;
-import org.apache.phoenix.schema.types.PSmallint;
 import org.apache.phoenix.schema.types.PTimestamp;
 import org.apache.phoenix.schema.types.PUnsignedLong;
 import org.apache.phoenix.schema.types.PVarbinary;
@@ -195,7 +194,7 @@ public class UpsertCompiler {
                 values[i++] = connection.getTenantId().getBytes();
             }
             if(tableRef.getTable().getViewIndexId() != null) {
-                values[i++] = PSmallint.INSTANCE.toBytes(tableRef.getTable().getViewIndexId());
+                values[i++] = tableRef.getTable().getViewIndexType().toBytes(tableRef.getTable().getViewIndexId());
             }
         }
         int rowCount = 0;
@@ -739,7 +738,7 @@ public class UpsertCompiler {
         final byte[][] values = new byte[nValuesToSet][];
         int nodeIndex = 0;
         if (isSharedViewIndex) {
-            values[nodeIndex++] = MetaDataUtil.getViewIndexIdDataType().toBytes(table.getViewIndexId());
+            values[nodeIndex++] = table.getViewIndexType().toBytes(table.getViewIndexId());
         }
         if (isTenantSpecific) {
             PName tenantId = connection.getTenantId();

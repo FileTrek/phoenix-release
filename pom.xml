@@ -2,9 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.phoenix</groupId>
   <artifactId>phoenix</artifactId>
-  <version>5.0.0.3.1.5.9-1</version>
+  <version>5.0.0.7.0.3.0-79-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Apache Phoenix</name>
+  <name>Apache Phoenix CDP</name>
   <description>A SQL layer over HBase</description>
 
   <licenses>
@@ -23,8 +23,10 @@
 
   <modules>
     <module>phoenix-core</module>
+    <!-- We do not build or ship phoenix-flume or phoenix-kafka
     <module>phoenix-flume</module>
     <module>phoenix-kafka</module>
+    -->
     <module>phoenix-pig</module>
     <module>phoenix-queryserver-client</module>
     <module>phoenix-queryserver</module>
@@ -39,21 +41,45 @@
   </modules>
 
   <repositories>
+<!--    <repository>-->
+<!--      <id>apache release</id>-->
+<!--      <url>https://repository.apache.org/content/repositories/releases/</url>-->
+<!--    </repository>-->
     <repository>
-      <id>apache release</id>
-      <url>https://repository.apache.org/content/repositories/releases/</url>
+      <id>cloudera-art</id>
+      <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
     </repository>
-    <repository>
-      <id>hwx-public</id>
-      <name>hwx</name>
-      <url>http://nexus-private.hortonworks.com/nexus/content/groups/public/</url>
-			<releases>
-			  <enabled>true</enabled>
-			</releases>
-			<snapshots>
-			  <enabled>true</enabled>
-			</snapshots>
-    </repository>
+<!--    <repository>-->
+<!--      <id>cloudera-pub</id>-->
+<!--      <url>https://repository.cloudera.com/content/repositories/public/</url>-->
+<!--    </repository>-->
+
+<!--    <repository>-->
+<!--      <releases>-->
+<!--        <enabled>true</enabled>-->
+<!--      </releases>-->
+<!--      <snapshots>-->
+<!--        <enabled>true</enabled>-->
+<!--      </snapshots>-->
+<!--      <id>cloudera release</id>-->
+<!--      <url>https://repository.cloudera.com/artifactory/libs-release-local/</url>-->
+<!--    </repository>-->
+<!--    <repository>-->
+<!--      <id>cdh.releases.repo</id>-->
+<!--      <url>https://repository.cloudera.com/content/groups/cdh-releases-rcs</url>-->
+<!--      <name>CDH Releases Repository</name>-->
+<!--      <snapshots>-->
+<!--        <enabled>false</enabled>-->
+<!--      </snapshots>-->
+<!--    </repository>-->
+<!--    <repository>-->
+<!--      <id>hwx-public</id>-->
+<!--      <name>hwx</name>-->
+<!--      <url>http://repo.hortonworks.com/nexus/content/groups/public/</url>-->
+<!--      <snapshots>-->
+<!--        <enabled>false</enabled>-->
+<!--      </snapshots>-->
+<!--    </repository>-->
   </repositories>
 
   <parent>
@@ -76,28 +102,28 @@
     <top.dir>${project.basedir}</top.dir>
 
     <!-- Hadoop Versions -->
-    <hbase.version>2.1.6.3.1.5.9-1</hbase.version>
-    <hadoop.version>3.1.1.3.1.5.9-1</hadoop.version>
+    <hbase.version>2.2.0.7.0.3.0-79</hbase.version>
+    <hadoop.version>3.1.1.7.0.3.0-79</hadoop.version>
 
     <!-- Dependency versions -->
     <commons-cli.version>1.4</commons-cli.version>
-    <hive.version>3.1.0.3.1.5.9-1</hive.version>
-    <pig.version>0.16.0.3.1.5.9-1</pig.version>
-    <tez.version>0.9.1.3.1.5.9-1</tez.version>
+    <hive.version>3.1.2000.7.0.3.0-79</hive.version>
+    <tez.version>0.9.1.7.0.3.0-79</tez.version>
+    <pig.version>0.16.0.7.0.3.0-79</pig.version>
     <jackson.version>1.9.2</jackson.version>
     <antlr.version>3.5.2</antlr.version>
     <log4j.version>1.2.17</log4j.version>
     <disruptor.version>3.3.6</disruptor.version>
-    <slf4j.version>1.6.4</slf4j.version>
+    <slf4j.version>1.7.25</slf4j.version>
     <protobuf-java.version>2.5.0</protobuf-java.version>
     <commons-io.version>2.1</commons-io.version>
     <commons-lang.version>3.8</commons-lang.version>
     <commons-logging.version>1.2</commons-logging.version>
     <commons-csv.version>1.0</commons-csv.version>
     <sqlline.version>1.2.0</sqlline.version>
-    <guava.version>28.0-jre</guava.version>
-    <flume.version>1.4.0</flume.version>
-    <kafka.version>0.9.0.0</kafka.version>
+    <guava.version>13.0.1</guava.version>
+    <flume.version>1.9.0.7.0.3.0-79</flume.version>
+    <kafka.version>2.3.0.7.0.3.0-79</kafka.version>
     <findbugs-annotations.version>1.3.9-1</findbugs-annotations.version>
     <jcip-annotations.version>1.0-1</jcip-annotations.version>
     <jline.version>2.11</jline.version>
@@ -108,10 +134,10 @@
     <!-- Do not change jodatime.version until HBASE-15199 is fixed -->
     <jodatime.version>1.6</jodatime.version>
     <joni.version>2.1.2</joni.version>
-    <avatica.version>1.10.0.3.1.5.9-1</avatica.version>
+    <avatica.version>1.10.0.7.0.3.0-79</avatica.version>
     <jetty.version>9.3.27.v20190418</jetty.version>
     <tephra.version>0.14.0-incubating</tephra.version>
-    <spark.version>2.3.2.3.1.5.9-1</spark.version>
+    <spark.version>2.4.0.7.0.3.0-79</spark.version>
     <scala.version>2.11.8</scala.version>
     <scala.binary.version>2.11</scala.binary.version>
     <stream.version>2.9.5</stream.version>
@@ -125,8 +151,8 @@
     <!-- Plugin versions -->
     <maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
     <maven-build-helper-plugin.version>1.9.1</maven-build-helper-plugin.version>
-    <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>2.20</maven-failsafe-plugin.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 
     <maven-dependency-plugin.version>2.1</maven-dependency-plugin.version>
     <maven.assembly.version>2.5.2</maven.assembly.version>
@@ -156,7 +182,7 @@
             <target>1.8</target>
           </configuration>
         </plugin>
-        <!--This plugin's configuration is used to store Eclipse m2e settings 
+        <!--This plugin's configuration is used to store Eclipse m2e settings
           only. It has no influence on the Maven build itself. -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -255,7 +281,7 @@
                 <runOrder>alphabetical</runOrder>
                 <!--parallel>methods</parallel>
                 <threadCount>20</threadCount-->
-                <argLine>-Xmx2000m -XX:MaxPermSize=256m -Djava.security.egd=file:/dev/./urandom "-Djava.library.path=${hadoop.library.path}${path.separator}${java.library.path}" -XX:NewRatio=4 -XX:SurvivorRatio=8 -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+DisableExplicitGC -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:CMSInitiatingOccupancyFraction=68 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./target/ -Dorg.apache.hadoop.hbase.shaded.io.netty.packagePrefix=org.apache.hadoop.hbase.shaded.</argLine>
+                <argLine>-Xmx2000m -XX:MaxPermSize=256m -Djava.security.egd=file:/dev/./urandom "-Djava.library.path=${hadoop.library.path}${path.separator}${java.library.path}" -XX:NewRatio=4 -XX:SurvivorRatio=8 -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+DisableExplicitGC -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:CMSInitiatingOccupancyFraction=68 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./target/ -Dorg.apache.hadoop.hbase.shaded.io.netty.packagePrefix=org.apache.hadoop.hbase.shaded.</argLine>
                 <redirectTestOutputToFile>${test.output.tofile}</redirectTestOutputToFile>
                 <shutdown>kill</shutdown>
                 <testSourceDirectory>${basedir}/src/it/java</testSourceDirectory>
@@ -284,7 +310,7 @@
 	                 at org.apache.phoenix.coprocessor.MetaDataEndpointImpl.doGetTable(MetaDataEndpointImpl.java:2835)
 	                 at org.apache.phoenix.coprocessor.MetaDataEndpointImpl.getTable(MetaDataEndpointImpl.java:490) -->
 		<!--enableAssertions>false</enableAssertions-->
-                <argLine>-Xmx3000m -XX:MaxPermSize=256m -Djava.security.egd=file:/dev/./urandom "-Djava.library.path=${hadoop.library.path}${path.separator}${java.library.path}" -XX:NewRatio=4 -XX:SurvivorRatio=8 -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+DisableExplicitGC -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:CMSInitiatingOccupancyFraction=68 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./target/ -Dorg.apache.hadoop.hbase.shaded.io.netty.packagePrefix=org.apache.hadoop.hbase.shaded.</argLine>
+                <argLine>-Xmx3000m -XX:MaxPermSize=256m -Djava.security.egd=file:/dev/./urandom "-Djava.library.path=${hadoop.library.path}${path.separator}${java.library.path}" -XX:NewRatio=4 -XX:SurvivorRatio=8 -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+DisableExplicitGC -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:CMSInitiatingOccupancyFraction=68 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./target/ -Dorg.apache.hadoop.hbase.shaded.io.netty.packagePrefix=org.apache.hadoop.hbase.shaded.</argLine>
                 <redirectTestOutputToFile>${test.output.tofile}</redirectTestOutputToFile>
                 <shutdown>kill</shutdown>
                 <testSourceDirectory>${basedir}/src/it/java</testSourceDirectory>
@@ -509,6 +535,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.cloudera.logredactor</groupId>
+        <artifactId>logredactor</artifactId>
+        <version>2.0.8</version>
+      </dependency>
       <!-- Intra-project dependencies -->
       <dependency>
         <groupId>org.apache.phoenix</groupId>
@@ -522,6 +553,7 @@
         <type>test-jar</type>
         <scope>test</scope>
       </dependency>
+      <!-- We do not ship or build phoenix-flume or phoenix-kafka
       <dependency>
         <groupId>org.apache.phoenix</groupId>
         <artifactId>phoenix-flume</artifactId>
@@ -532,6 +564,7 @@
         <artifactId>phoenix-kafka</artifactId>
         <version>${project.version}</version>
       </dependency>
+      -->
       <dependency>
         <groupId>org.apache.phoenix</groupId>
         <artifactId>phoenix-pig</artifactId>
@@ -627,6 +660,12 @@
         <groupId>org.apache.hbase</groupId>
         <artifactId>hbase-server</artifactId>
         <version>${hbase.version}</version>
+        <exclusions>
+        <exclusion>
+          <groupId>org.glassfish</groupId>
+          <artifactId>javax.el</artifactId>
+        </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.apache.hbase</groupId>
@@ -1030,6 +1069,29 @@
         <artifactId>bcprov-jdk15on</artifactId>
         <version>${bouncycastle.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.tez</groupId>
+        <artifactId>tez-tests</artifactId>
+        <version>${tez.version}</version>
+        <type>test-jar</type>
+        <exclusions>
+          <exclusion>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-yarn-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.tez</groupId>
+        <artifactId>tez-dag</artifactId>
+        <version>${tez.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-yarn-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -1071,7 +1133,7 @@
     <profile>
       <id>spark16</id>
       <properties>
-        <spark.version>2.3.2.3.1.5.9-1</spark.version>
+        <spark.version>2.4.0.7.0.3.0-79</spark.version>
         <scala.version>2.10.4</scala.version>
         <scala.binary.version>2.10</scala.binary.version>
       </properties>

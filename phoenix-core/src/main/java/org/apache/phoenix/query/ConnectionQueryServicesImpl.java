@@ -3029,6 +3029,14 @@ public class ConnectionQueryServicesImpl extends DelegateQueryServices implement
                     );
             addParentToChildLinks(metaConnection);
         }
+        if (currentServerSideTableTimeStamp < MetaDataProtocol.MIN_SYSTEM_TABLE_TIMESTAMP_5_0_0) {
+            metaConnection = addColumnsIfNotExists(
+                    metaConnection,
+                    PhoenixDatabaseMetaData.SYSTEM_CATALOG,
+                    MetaDataProtocol.MIN_SYSTEM_TABLE_TIMESTAMP_5_0_0,
+                    PhoenixDatabaseMetaData.VIEW_INDEX_ID_DATA_TYPE + " "
+                            + PInteger.INSTANCE.getSqlTypeName());
+        }
         return metaConnection;
     }
 

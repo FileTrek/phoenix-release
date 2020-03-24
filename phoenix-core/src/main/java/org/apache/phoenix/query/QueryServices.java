@@ -211,6 +211,9 @@ public interface QueryServices extends SQLCloseable {
     public static final String DEFAULT_TABLE_ISTRANSACTIONAL_ATTRIB = "phoenix.table.istransactional.default";
     public static final String DEFAULT_TRANSACTION_PROVIDER_ATTRIB = "phoenix.table.transaction.provider.default";
     public static final String GLOBAL_METRICS_ENABLED = "phoenix.query.global.metrics.enabled";
+
+    // Tag Name to determine the Phoenix Client Type
+    public static final String CLIENT_METRICS_TAG = "phoenix.client.metrics.tag";
     
     // Transaction related configs
     public static final String TRANSACTIONS_ENABLED = "phoenix.transactions.enabled";
@@ -314,6 +317,8 @@ public interface QueryServices extends SQLCloseable {
     public static final String LOG_BUFFER_WAIT_STRATEGY = "phoenix.log.wait.strategy";
     public static final String LOG_SAMPLE_RATE = "phoenix.log.sample.rate";
 
+    // Enable support for long view index(default is false)
+    public static final String LONG_VIEW_INDEX_ENABLED_ATTRIB = "phoenix.index.longViewIndex.enabled";
     /**
      * Get executor service used for parallel scans
      */

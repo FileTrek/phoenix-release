@@ -64,6 +64,7 @@ import org.apache.phoenix.schema.TableRef;
 import org.apache.phoenix.schema.types.PDataType;
 import org.apache.phoenix.schema.types.PVarbinary;
 import org.apache.phoenix.util.ByteUtil;
+import org.apache.phoenix.util.MetaDataUtil;
 import org.apache.phoenix.util.QueryUtil;
 
 import com.google.common.collect.Iterators;
@@ -124,6 +125,12 @@ public class CreateTableCompiler {
             // Used to track column references in a view
             ExpressionCompiler expressionCompiler = new ColumnTrackingExpressionCompiler(context, isViewColumnReferencedToBe);
             parentToBe = tableRef.getTable();
+            // Disallow creating views on top of SYSTEM tables. See PHOENIX-5386
+            if (parentToBe.getType() == PTableType.SYSTEM) {
+                throw new SQLExceptionInfo
+                        .Builder(SQLExceptionCode.CANNOT_CREATE_VIEWS_ON_SYSTEM_TABLES)
+                        .build().buildException();
+            }
             viewTypeToBe = parentToBe.getViewType() == ViewType.MAPPED ? ViewType.MAPPED : ViewType.UPDATABLE;
             if (whereNode == null) {
                 viewStatementToBe = parentToBe.getViewStatement();
@@ -189,7 +196,7 @@ public class CreateTableCompiler {
             @Override
             public MutationState execute() throws SQLException {
                 try {
-                    return client.createTable(finalCreate, splits, parent, viewStatement, viewType, viewColumnConstants, isViewColumnReferenced);
+                    return client.createTable(finalCreate, splits, parent, viewStatement, viewType, MetaDataUtil.getViewIndexIdDataType(), viewColumnConstants, isViewColumnReferenced);
                 } finally {
                     if (client.getConnection() != connection) {
                         client.getConnection().close();
