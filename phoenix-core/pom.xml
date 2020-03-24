@@ -9,6 +9,7 @@
   <artifactId>phoenix-core</artifactId>
   <name>Phoenix Core</name>
   <description>Core Phoenix codebase</description>
+  <version>5.0.0.7.0.3.0-79</version>
 
   <licenses>
       <license>
