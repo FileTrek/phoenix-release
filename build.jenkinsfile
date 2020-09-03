@@ -9,7 +9,7 @@ properties([
 
 node("ops") {
     stage('Cloning Repo') {
-        git branch: params.BRANCH_NAME, credentialsId: 'interset-readonly', url: 'git@github.com:Filetrek/phoenix-release.git'
+        git branch: params.BRANCH_NAME, credentialsId: 'git-interset-readonly', url: 'git@github.com:MicroFocus/phoenix-release.git'
     }
 
     stage('Building Phoenix Spark Jar') {
