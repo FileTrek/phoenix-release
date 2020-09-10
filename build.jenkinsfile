@@ -3,11 +3,12 @@
 
 properties([
         parameters([
-                string(defaultValue: params.BRANCH_NAME, description: 'Branch of git repo to get jenkinsfile from', name: 'BRANCH_NAME'),
+                string(defaultValue: params.BRANCH_NAME, description: 'Branch of git repo to get jenkins file from', name: 'BRANCH_NAME', trim: false),
+                string(defaultValue: params.BUILD_NODE ?: 'ops', description: 'Label for the build environment to use', name: 'BUILD_NODE', trim: false)
         ])
 ])
 
-node("ops") {
+node("${params.BUILD_NODE}") {
     stage('Cloning Repo') {
         git branch: params.BRANCH_NAME, credentialsId: 'git-interset-readonly', url: 'git@github.com:MicroFocus/phoenix-release.git'
     }
